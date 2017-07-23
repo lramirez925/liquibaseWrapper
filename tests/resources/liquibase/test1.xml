@@ -1,0 +1,26 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="lramirez">
+        <comment>A test1</comment>
+        <createTable remarks="A table to test with" tableName="people">
+            
+            <column name="fname" type="varchar(50)"/>
+            <column name="lname" type="varchar(50)"/>
+
+        </createTable>
+    </changeSet>
+
+     <changeSet id="2" author="lramirez">
+        <comment>A test1</comment>
+        <insert 
+            tableName="people">
+        <column name="fname" type="varchar(50)" value="bob"/>
+        <column name="lname" type="varchar(50)" value="belcher"/>
+    </insert>
+    </changeSet>
+</databaseChangeLog>
