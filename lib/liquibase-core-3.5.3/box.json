@@ -1,7 +1,0 @@
-{
-    "version":"0.0.0",
-    "location":"jar:http://central.maven.org/maven2/org/liquibase/liquibase-core/3.5.3/liquibase-core-3.5.3.jar",
-    "slug":"liquibase-core-3.5.3",
-    "name":"liquibase-core-3.5.3.jar",
-    "type":"jars"
-}
