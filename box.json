@@ -15,7 +15,7 @@
     "description":"Wrapper for the liquibase jar",
     "type":"modules",
     "dependencies":{
-        "liquibase-core-3.5.3":"jar:http://central.maven.org/maven2/org/liquibase/liquibase-core/3.5.3/liquibase-core-3.5.3.jar"    
+        "liquibase-core-3.5.3":"jar:http://central.maven.org/maven2/org/liquibase/liquibase-core/3.5.3/liquibase-core-3.5.3.jar"
     },
     "devDependencies":{
         "coldbox":"^4.3.0+188",
@@ -23,8 +23,8 @@
     },
     "installPaths":{
         "testbox":"testbox/",
-        "coldbox":"tests/resources/app/coldbox/",
-        "liquibase-core-3.5.3":"lib/liquibase-core-3.5.3/"
+        "coldbox":"tests/resources/app/coldbox",
+        "liquibase-core-3.5.3":"lib/liquibase-core-3.5.3"
     },
     "scripts":{
         "postVersion":"package set location='lramirez925/liquibaseWrapper#v`package version`'",

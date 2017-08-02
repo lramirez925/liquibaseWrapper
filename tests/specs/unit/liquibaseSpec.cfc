@@ -26,6 +26,44 @@ component extends="testbox.system.BaseSpec" {
 
                 expect( results.recordCount ).toBe( 1 );
             } );
+
+            it(title= "Should be able to pass a structure as a datasource and run the xml files. Only ran on Lucee", body = function() {
+                var testObj = new src.liquibase();
+                var dbStruct = {
+                    class: 'org.h2.Driver',
+                    bundleName: 'org.h2',
+                    bundleVersion: '1.3.172',
+                    connectionString: 'jdbc:h2:#expandPath( '/tests/db/test' )#;MODE=MySQL'
+                };
+
+                testObj.update( expandPath('resources/liquibase/test1.xml'),dbStruct );
+
+                var results = queryExecute("Select * from people",{},{datasource:dbStruct});
+
+            },skip=function(){
+                return !structKeyExists( server, "lucee" );
+            });
+
+            it(title= "Should be able to pass a structure as a datasource and run the xml files. Only ran on non-Lucee", body = function() {
+                var testObj = new src.liquibase();
+                var dbStruct = {
+                    class: 'org.h2.Driver',
+                    bundleName: 'org.h2',
+                    bundleVersion: '1.3.172',
+                    connectionString: 'jdbc:h2:#expandPath( '/tests/db/test' )#;MODE=MySQL'
+                };
+
+                expect( 
+                    function(){ 
+                        testObj.update( expandPath('resources/liquibase/test1.xml'),dbStruct ); 
+                    } 
+                ).toThrow( 'InvalidServer' );
+
+                var results = queryExecute("Select * from people",{},{datasource:dbStruct});
+
+            },skip=function(){
+                return structKeyExists( server, "lucee" );
+            });
         } );
     }
 }
