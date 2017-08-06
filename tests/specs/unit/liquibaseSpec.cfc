@@ -8,7 +8,7 @@ component extends="testbox.system.BaseSpec" {
                  queryExecute("DROP ALL OBJECTS",{},{datasource:"test"})
             });
 
-            it( "Should create a people table  with a fname and lname column as well as insert a single row.", function() {
+            it( "Should create a people table with a fname and lname column as well as insert a single row.", function() {
 
                 var a = new src.liquibase();
                 a.update(expandPath('resources/liquibase/test1.xml'),'test');

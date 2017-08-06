@@ -24,7 +24,7 @@ component {
     this.mappings[ "/app" ] = testsPath & "resources/app";
     this.mappings[ "/coldbox" ] = testsPath & "resources/app/coldbox";
     this.mappings[ "/testbox" ] = rootPath & "/testbox";
-    this.mappings[ "/changeLogs" ] = rootPath & "resources/liquibase"
+    this.mappings[ "/changeLogs" ] = rootPath & "resources/liquibase";
 
 
 
