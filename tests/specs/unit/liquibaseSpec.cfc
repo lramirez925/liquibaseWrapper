@@ -1,11 +1,27 @@
 component extends="testbox.system.BaseSpec" {
 
+    private boolean function isLucee() {
+        return structKeyExists(server,'lucee');
+    }
 
     function run() {
         describe( "Liquibase object", function() {
 
             beforeEach(function( currentSpec ) {
-                 queryExecute("DROP ALL OBJECTS",{},{datasource:"test"})
+                if(isLucee()) {
+                    queryExecute("DROP ALL OBJECTS",{},{datasource:"test"});
+
+                } else {
+     
+                    var results = queryExecute("
+                    select 'drop table if exists ""' || tablename || '"" cascade;' as q
+                    from pg_tables
+                    where schemaname = 'public'; ",{},{datasource:"test"});
+
+                    for(var a in results) {
+                        queryExecute(a['q'],{},{datasource:"test"});
+                    }
+                }
             });
 
             it( "Should create a people table with a fname and lname column as well as insert a single row.", function() {
@@ -59,10 +75,20 @@ component extends="testbox.system.BaseSpec" {
                     } 
                 ).toThrow( 'InvalidServer' );
 
-                var results = queryExecute("Select * from people",{},{datasource:dbStruct});
-
             },skip=function(){
                 return structKeyExists( server, "lucee" );
+            });
+
+            it("testing this",function() {
+                var paths = [expandPath('/lib/liquibase-core-3.5.3/liquibase-core-3.5.3.jar')];
+
+			    var loader = createObject("component", "modules.cbjavaloader.models.javaloader.JavaLoader").init(paths);
+                
+                var resourceService = loader.create("liquibase.resource.FileSystemResourceAccessor");
+
+                var li = loader.create("liquibase.Liquibase").init(expandPath('resources/liquibase/test1.xml'));
+
+                writedump(li);abort;
             });
         } );
     }
