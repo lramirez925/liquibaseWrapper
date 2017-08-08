@@ -79,17 +79,6 @@ component extends="testbox.system.BaseSpec" {
                 return structKeyExists( server, "lucee" );
             });
 
-            it("testing this",function() {
-                var paths = [expandPath('/lib/liquibase-core-3.5.3/liquibase-core-3.5.3.jar')];
-
-			    var loader = createObject("component", "modules.cbjavaloader.models.javaloader.JavaLoader").init(paths);
-                
-                var resourceService = loader.create("liquibase.resource.FileSystemResourceAccessor");
-
-                var li = loader.create("liquibase.Liquibase").init(expandPath('resources/liquibase/test1.xml'));
-
-                writedump(li);abort;
-            });
         } );
     }
 }

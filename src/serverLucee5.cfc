@@ -9,7 +9,6 @@ component {
             dataSource = pageContext.getDataSource(arguments.ds);
         }
         
-        writedumP(arguments.pageContext.getConfig().getDatasourceConnectionPool().getDatasourceConnection(arguments.pageContext.getConfig(), dataSource, dataSource.getUserName(),  dataSource.getPassword()).getConnection());abort;
         return arguments.pageContext.getConfig().getDatasourceConnectionPool().getDatasourceConnection(arguments.pageContext.getConfig(), dataSource, dataSource.getUserName(),  dataSource.getPassword()).getConnection();
     }
 }
