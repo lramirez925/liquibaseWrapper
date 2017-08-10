@@ -58,7 +58,7 @@ component {
     }
 
     private any function getResourceAccessor() {
-        return createObject('java','liquibase.resource.FileSystemResourceAccessor');
+        return createObject('java','liquibase.resource.FileSystemResourceAccessor').init();
     }
 
     private any function getJdbxConnection(required any con) {
