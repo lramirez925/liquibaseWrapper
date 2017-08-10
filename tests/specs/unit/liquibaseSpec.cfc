@@ -42,6 +42,15 @@ component extends="testbox.system.BaseSpec" {
 
                 expect( results.recordCount ).toBe( 1 );
             } );
+            
+             it( "Should create a people table with a fname and lname column as well as insert 2 rows by using the include, .", function() {
+
+                var a = new src.liquibase();
+                a.update(expandPath('resources/liquibase/test2.xml'),'test');
+                var results = queryExecute("Select * from people",{},{datasource:"test"});
+
+                expect( results.recordCount ).toBe( 2 );
+            } );
 
             it(title= "Should be able to pass a structure as a datasource and run the xml files. Only ran on Lucee", body = function() {
                 var testObj = new src.liquibase();
