@@ -1,8 +1,8 @@
 {
     "name":"liquibaseWrapper",
-    "version":"0.0.1",
+    "version":"0.1.0",
     "author":"",
-    "location":"lramirez925/liquibaseWrapper#v0.0.1",
+    "location":"lramirez925/liquibaseWrapper#v0.1.0",
     "homepage":"https://github.com/lramirez925/liquibaseWrapper",
     "documentation":"https://github.com/lramirez925/liquibaseWrapper",
     "repository":{
@@ -15,14 +15,14 @@
     "description":"Wrapper for the liquibase jar",
     "type":"modules",
     "dependencies":{
-        "liquibase-core-3.5.3":"jar:http://central.maven.org/maven2/org/liquibase/liquibase-core/3.5.3/liquibase-core-3.5.3.jar"    
+        "liquibase-core-3.5.3":"jar:http://central.maven.org/maven2/org/liquibase/liquibase-core/3.5.3/liquibase-core-3.5.3.jar"
     },
     "devDependencies":{
         "testbox":"^2.4.0+80"
     },
     "installPaths":{
         "testbox":"testbox/",
-        "liquibase-core-3.5.3":"lib/liquibase-core-3.5.3"    
+        "liquibase-core-3.5.3":"lib/liquibase-core-3.5.3"
     },
     "scripts":{
         "postVersion":"package set location='lramirez925/liquibaseWrapper#v`package version`'",
