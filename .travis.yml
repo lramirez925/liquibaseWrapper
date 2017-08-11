@@ -18,7 +18,7 @@ install:
   - sudo apt-get update && sudo apt-get --assume-yes install commandbox
   - box install
 before_script:
-  - box server start $ENGINE port=8500
+  - box server start name=$ENGINE port=8500
 script:
   - box testbox run runner='http://127.0.0.1:8500/tests/runner.cfm'
 notifications:
