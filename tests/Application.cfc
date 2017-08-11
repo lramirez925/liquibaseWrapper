@@ -1,6 +1,6 @@
 component {
 
-    this.name = "ColdBoxTestingSuite" & hash(getCurrentTemplatePath());
+    this.name = "ColdBoxTestingSuite" & hash( CreateUUID());
     this.sessionManagement  = true;
     this.setClientCookies   = true;
     this.sessionTimeout     = createTimeSpan( 0, 0, 15, 0 );
@@ -20,9 +20,13 @@ component {
             connectionString: 'jdbc:h2:#expandPath( '/tests/db/#this.dbFileName#' )#;MODE=MySQL'
 	    };
     } else {
-
+        this.dbFileUrl =  createDerbyDb(this.dbFileName);
+        this.datasources[ 'test' ] = {
+            driver="Apache Derby Embedded",
+            database= this.dbFileUrl
+	    };
     }
- 
+
 
 
     testsPath = getDirectoryFromPath( getCurrentTemplatePath() );
@@ -43,19 +47,23 @@ component {
     }
 
 
-    private any function createDerbyDb(required string dbName) {
+    private string function createDerbyDb(required string dbName) {
+        //Path the the database
+
+        var dbLocation = replace(getDirectoryFromPath( getCurrentTemplatePath() ),"\","/","all") & "db/#dbName#";
         //Create a derby database if it does not already exist
-        if (!fileExists("#getDirectoryFromPath( getCurrentTemplatePath() )#db/#dbName#/README_DO_NOT_TOUCH_FILES.txt")) {
+        if (!fileExists("#dbLocation#/README_DO_NOT_TOUCH_FILES.txt")) {
             //Get the apached derby JDBC class
             var Class = createObject("java","java.lang.Class");
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             // Use the DriverManager to connect
             DriverManager = createObject("java", "java.sql.DriverManager");
-            //Path the the database
-            var dbLocation = replace(getDirectoryFromPath( getCurrentTemplatePath() ),"\","/","all") & "db/#dbName#";
             //Connect and pass the create=true parameter
             con = DriverManager.getConnection("jdbc:derby:#dbLocation#;create=true;");
             con.close();
+        } else {
+            writedump('hhhh');abort;
         }
+        return dbLocation;
     }
 }

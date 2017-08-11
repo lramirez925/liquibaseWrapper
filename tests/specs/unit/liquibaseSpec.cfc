@@ -12,12 +12,13 @@ component extends="testbox.system.BaseSpec" {
                     queryExecute("DROP ALL OBJECTS",{},{datasource:"test"});
 
                 } else {
-     
-                    var results = queryExecute("
-                    select 'drop table if exists ""' || tablename || '"" cascade;' as q
-                    from pg_tables
-                    where schemaname = 'public'; ",{},{datasource:"test"});
 
+                    var results = queryExecute("
+                        SELECT 'DROP TABLE ' || schemaname ||'.' || tablename || '' as q
+                        FROM SYS.SYSTABLES
+                        INNER JOIN SYS.SYSSCHEMAS ON SYS.SYSTABLES.SCHEMAID = SYS.SYSSCHEMAS.SCHEMAID
+                        where schemaname != 'SYS' and schemaname != 'SYSIBM'
+                    ",{},{datasource:"test"});
                     for(var a in results) {
                         queryExecute(a['q'],{},{datasource:"test"});
                     }
