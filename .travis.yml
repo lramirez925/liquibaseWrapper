@@ -19,6 +19,8 @@ install:
   - box install
 before_script:
   - box server start name=$ENGINE port=8500
+  - install commandbox-cfconfig
+  - cfconfig import from=./.CFConfig.json to=$ENGINE
 script:
   - box testbox run runner='http://127.0.0.1:8500/tests/runner.cfm'
 notifications:

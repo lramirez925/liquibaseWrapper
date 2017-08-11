@@ -25,7 +25,6 @@
         "liquibase-core-3.5.3":"lib/liquibase-core-3.5.3"    
     },
     "scripts":{
-        "postonServerInstall":"cfconfig import from=./.CFConfig.json to=`serverInfo name`",
         "postVersion":"package set location='lramirez925/liquibaseWrapper#v`package version`'",
         "onRelease":"publish",
         "postPublish":"!git push && !git push --tags"
